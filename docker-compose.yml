@@ -1,0 +1,74 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: api
+    stdin_open: true
+    tty: true  
+    container_name: api
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    command: php -S 0.0.0.0:80 -t ./public
+    volumes:
+      - .:/home/php/api
+    depends_on:
+      - mysql
+    networks:
+      - api-network
+
+  mysqll:
+    image: mysql
+    container_name: mysql
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_HOST=%
+    networks:
+      - api-network
+    
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8086:80"
+    environment:
+      - PMA_HOST=mysql
+      - PMA_PORT=${DB_PORT}
+      #- PMA_ARBITRARY=1
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    depends_on:
+      - mysql
+    networks:
+      - api-network
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    networks:
+      - api-network
+
+networks:
+  api-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
+    driver: local

@@ -25,8 +25,8 @@ class JwtMiddleware extends BaseMiddleware
         try {
             $user = JWTAuth::parseToken()->authenticate();
             if($user->activated == false){
-                $response = DefaultResponseHelper::error('Sua conta está desativada', 401);
-                return response()->json($response, 401);
+                $response = DefaultResponseHelper::error('Sua conta está desativada', 403);
+                return response()->json($response, 403);
             }
         } catch (Exception $e) {
             if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){ //Token is Invalid

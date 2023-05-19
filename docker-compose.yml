@@ -20,7 +20,7 @@ services:
     networks:
       - api-network
 
-  mysqll:
+  mysql:
     image: mysql
     container_name: mysql
     ports:
@@ -49,17 +49,6 @@ services:
       - MYSQL_USER=${DB_USERNAME}
       - MYSQL_PASSWORD=${DB_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
-    depends_on:
-      - mysql
-    networks:
-      - api-network
-
-  adminer:
-    image: adminer
-    container_name: adminer
-    restart: always
-    ports:
-      - "8080:8080"
     depends_on:
       - mysql
     networks:

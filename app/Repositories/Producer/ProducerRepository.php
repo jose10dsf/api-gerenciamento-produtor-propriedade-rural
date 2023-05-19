@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repositories\Producer;
 
 use App\Repositories\AbstractRepository;
+use App\Helpers\ProducerHelper;
 
 /**
  * Class ProducerRepository
@@ -98,8 +99,7 @@ class ProducerRepository extends AbstractRepository
     {
         $producer = $this->model::findOrFail($id);
         $property = $producer->property;
-        $result = $producer->toArray();
-        $result["property"] = $property->toArray();
+        $result = ProducerHelper::formatData($producer->toArray(), $property->toArray());
         return $result;
     }
 

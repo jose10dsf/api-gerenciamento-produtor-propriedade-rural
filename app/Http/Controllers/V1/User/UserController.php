@@ -28,7 +28,7 @@ class UserController extends AbstractController
      * @var array|string[]
      */
     protected array $orderByFields = [
-        'id', 'name'
+        'id', 'name', 'created_at', 'updated_at'
     ];
 
     /**

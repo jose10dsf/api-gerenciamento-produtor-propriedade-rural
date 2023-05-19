@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Helpers\DefaultResponseHelper;
 use App\Helpers\ModelHelper;
+use App\Helpers\ProducerHelper;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -76,8 +77,7 @@ class ProducerController extends AbstractController
             $producer = $this->service->create($producerData);
             $propertyData["producer_id"] = $producer["id"];
             $property = $this->propertyService->create($propertyData);
-            $result = $producer;
-            $result["property"] = $property;
+            $result = ProducerHelper::formatData($producer, $property);
             $response = DefaultResponseHelper::success($result, Response::HTTP_CREATED);
         } catch (Exception $e) {
             $response = DefaultResponseHelper::error($e->getMessage());

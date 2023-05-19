@@ -21,7 +21,7 @@ use App\Helpers\DefaultResponseHelper;
 
 $router->get('/', function () use ($router) {
     //return $router->app->version();
-    $response = DefaultResponseHelper::success(['message' => 'Bem-vindo a api do sistema de gerenciamento de propriedades rurais!']);
+    $response = DefaultResponseHelper::success(['message' => 'Bem-vindo a api do sistema de cadastramento de produtores e propriedades rurais!']);
     return response()->json($response);
 });
 

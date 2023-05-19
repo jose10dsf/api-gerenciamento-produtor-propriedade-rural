@@ -26,7 +26,7 @@ class Property extends Model {
      */
     public array $rules = [
         'name' => 'required|min:2|max:180',
-        'rural_cadastre' => 'required|min:2|max:2000',
+        'rural_cadastre' => 'required|min:2|max:70',
         'producer_id' => 'required|numeric|exists:producers,id',
     ];
 
@@ -36,7 +36,7 @@ class Property extends Model {
      */
     public array $putMethodRules = [
         'name' => 'required|min:2|max:180',
-        'rural_cadastre' => 'required|min:2|max:2000',
+        'rural_cadastre' => 'required|min:2|max:70',
     ];
 
     /**
@@ -44,7 +44,7 @@ class Property extends Model {
      */
     public array $patchMethodRules = [
         'name' => 'min:2|max:180',
-        'rural_cadastre' => 'min:2|max:2000',
+        'rural_cadastre' => 'min:2|max:70',
     ];
 
     /**

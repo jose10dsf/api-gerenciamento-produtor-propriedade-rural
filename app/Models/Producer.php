@@ -28,7 +28,7 @@ class Producer extends Model {
         'producer_name' => 'required|min:2|max:180',
         'property_name' => 'required|min:2|max:180',
         'cpf' => 'required|digits:11|cpf|unique:producers,cpf',
-        'rural_cadastre' => 'required|min:2|max:2000|unique:properties,rural_cadastre',
+        'rural_cadastre' => 'required|min:2|max:70|unique:properties,rural_cadastre',
     ];
 
     /**
@@ -38,7 +38,7 @@ class Producer extends Model {
         'producer_name' => 'required|min:2|max:180',
         'property_name' => 'required|min:2|max:180',
         'cpf' => 'required|digits:11|cpf|unique:producers,cpf',
-        'rural_cadastre' => 'required|min:2|max:2000|unique:properties,rural_cadastre',
+        'rural_cadastre' => 'required|min:2|max:70|unique:properties,rural_cadastre',
     ];
 
     /**
@@ -48,7 +48,7 @@ class Producer extends Model {
         'producer_name' => 'min:2|max:180',
         'property_name' => 'min:2|max:180',
         'cpf' => 'digits:11|cpf|unique:producers,cpf',
-        'rural_cadastre' => 'min:2|max:2000|unique:properties,rural_cadastre',
+        'rural_cadastre' => 'min:2|max:70|unique:properties,rural_cadastre',
     ];
 
     public function property()

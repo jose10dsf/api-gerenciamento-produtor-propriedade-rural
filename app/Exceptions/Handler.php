@@ -51,18 +51,23 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         // start custom code
-        if($exception instanceof \Illuminate\Auth\Access\AuthorizationException){
-            $response = DefaultResponseHelper::error($exception->getMessage(), 403);
-            return response()->json($response, 403);
-        } else if($exception->getStatusCode() == 404){
-            $response = DefaultResponseHelper::error('URI não encontrada', 404);
-            return response()->json($response, 404);
-        } else if($exception->getStatusCode() == 405){
-            $response = DefaultResponseHelper::error('Método não permitido', 405);
-            return response()->json($response, 405);
-        } else if($exception->getStatusCode() == 500){
-            $response = DefaultResponseHelper::error('Ocorreu um erro interno do servidor', 500);
-            return response()->json($response, 500);
+        if (method_exists($exception, 'getStatusCode')) {
+            if($exception instanceof \Illuminate\Auth\Access\AuthorizationException){
+                $response = DefaultResponseHelper::error($exception->getMessage(), 403);
+                return response()->json($response, 403);
+            } else if($exception->getStatusCode() == 404){
+                $response = DefaultResponseHelper::error('URI não encontrada', 404);
+                return response()->json($response, 404);
+            } else if($exception->getStatusCode() == 405){
+                $response = DefaultResponseHelper::error('Método não permitido', 405);
+                return response()->json($response, 405);
+            } else if($exception->getStatusCode() == 500){
+                $response = DefaultResponseHelper::error('Ocorreu um erro interno do servidor', 500);
+                return response()->json($response, 500);
+            } else {
+                $response = DefaultResponseHelper::error('Ocorreu um erro interno do servidor', 500);
+                return response()->json($response, 500);
+            }
         }
         // end custom code
         return parent::render($request, $exception);

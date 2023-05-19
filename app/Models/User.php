@@ -21,7 +21,7 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
      * @var array
      */
     protected $fillable = [
-        'name', 'password', 'activated'
+        'name', 'password', 'activated', 'is_super_admin'
     ];
 
     /**
@@ -36,6 +36,7 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
         'name' => 'required|min:2|max:180|unique:users,name',
         'password' => 'required|min:6|max:50',
         'activated' => 'boolean',
+        'is_super_admin' => 'boolean'
     ];
 
     /**
@@ -45,6 +46,7 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
         'name' => 'required|min:2|max:180|unique:users,name',
         'password' => 'min:6|max:50',
         'activated' => 'boolean',
+        'is_super_admin' => 'boolean'
     ];
 
     /**
@@ -54,6 +56,7 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
         'name' => 'min:2|max:180|unique:users,name',
         'password' => 'min:6|max:50',
         'activated' => 'boolean',
+        'is_super_admin' => 'boolean'
     ];
 
     /**
